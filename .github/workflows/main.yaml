@@ -1,0 +1,19 @@
+name: CI
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build and run dev container and react-project
+        uses: devcontainers/ci@v0.3
+        with:
+          runCmd: |
+            cd react-project
+            pnpm install
+            pnpm run build
