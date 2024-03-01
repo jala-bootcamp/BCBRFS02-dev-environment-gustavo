@@ -10,10 +10,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build and run dev container and react-project
-        uses: devcontainers/ci@v0.3
+      - name: Use Node.js 20
+        uses: actions/setup-node@v1
         with:
-          runCmd: |
-            cd react-project
-            pnpm install
-            pnpm run build
+          node-version: 20.x
+          cache: 'pnpm'
+      - run: cd react-project
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+                  
