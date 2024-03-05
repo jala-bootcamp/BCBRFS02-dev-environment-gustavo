@@ -10,10 +10,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-        # uses: pnpm/action-setup@v3
-        # with:
-        #   version: 8
-
       - name: Setup Docker
         uses: docker/login-action@v3
         with:
@@ -25,3 +21,14 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPOSITORY }}:latest
+
+          - name: Install SonarScanner
+        uses: sonarsource/sonar-scanner-cli@v1.7.0
+
+      - name: Run SonarQube analysis
+        run: |
+          sonar-scanner \
+          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \ 
+          -Dsonar.sources=./src \
+          -Dsonar.host.url=${{ secrets.SONAR_URL }}  
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
