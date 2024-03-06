@@ -31,13 +31,11 @@ jobs:
           SONAR_PROJECT_KEY: ${{ secrets.SONAR_PROJECT_KEY }}
           SONAR_ORGANIZATION: ${{ secrets.SONAR_ORGANIZATION }}
 
-          
       - name: Run SonarQube analysis
         run: |
           sonar-scanner \
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \ 
-          -Dsonar.sources=./src \
-          -Dsonar.host.url=${{ secrets.SONAR_URL }}  
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} 
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-          -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
+            -Dsonar.sources=./src \
+            -Dsonar.host.url=${{ secrets.SONAR_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+            -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }}
